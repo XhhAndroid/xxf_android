@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Description
  * <p>
+ *
  * @Author: XGod  xuanyouwu@163.com  17611639080  https://github.com/NBXXF     https://blog.csdn.net/axuanqq
  * date createTime：2017/4/8
  * version 1.0.0
@@ -56,6 +58,7 @@ public class BaseFragmentAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> fragmentsList = new ArrayList<Fragment>();
     private final List<CharSequence> mFragmentTitles = new ArrayList<CharSequence>();
+    private final List<CharSequence> mFragmentTitlesFormat = new ArrayList<CharSequence>();
     private FragmentManager fm;
 
     public List<Fragment> getFragmentsList() {
@@ -91,13 +94,19 @@ public class BaseFragmentAdapter extends FragmentPagerAdapter {
     }
 
     public void bindTitle(boolean isRefresh, List<? extends CharSequence> titles) {
+        bindTitle(isRefresh, titles, Collections.emptyList());
+    }
+
+    public void bindTitle(boolean isRefresh, List<? extends CharSequence> titles, List<? extends CharSequence> formatTitles) {
         if (titles == null) {
             return;
         }
         if (isRefresh) {
             mFragmentTitles.clear();
+            mFragmentTitlesFormat.clear();
         }
         mFragmentTitles.addAll(titles);
+        mFragmentTitlesFormat.addAll(formatTitles);
         notifyDataSetChanged();
     }
 
@@ -143,7 +152,12 @@ public class BaseFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (mFragmentTitles.isEmpty()) return "";
+        if (!mFragmentTitlesFormat.isEmpty()) {
+            return mFragmentTitlesFormat.get(position % mFragmentTitlesFormat.size());
+        }
+        if (mFragmentTitles.isEmpty()) {
+            return "";
+        }
         return mFragmentTitles.get(position % mFragmentTitles.size());
     }
 
