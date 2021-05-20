@@ -27,6 +27,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -2215,5 +2216,27 @@ public class NumberUtils {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * 判断该数字是否为0
+     *
+     * @param x
+     * @return
+     */
+    public static boolean isZero(Object x) {
+        BigDecimal xBd = innerConvertDecimal(x);
+        return xBd.compareTo(BigDecimal.ZERO) == 0;
+    }
+
+    /**
+     * 判断该数字为正数（大于等于0）
+     *
+     * @param x
+     * @return
+     */
+    public static boolean isPositiveNumber(Object x) {
+        BigDecimal xBd = innerConvertDecimal(x);
+        return xBd.compareTo(BigDecimal.ZERO) >= 0;
     }
 }
