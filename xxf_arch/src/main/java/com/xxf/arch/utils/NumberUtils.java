@@ -1098,7 +1098,7 @@ public class NumberUtils {
                 dec = str.substring(decPos + 1);
             }
             mant = getMantissa(str, decPos);
-            numDecimals = dec.length(); // gets number of digits past the decimal to ensure no loss of precision for floating point numbers.
+            numDecimals = dec.length() + decPos + 1; // gets number of digits past the decimal to ensure no loss of precision for floating point numbers.
         } else {
             if (expPos > -1) {
                 if (expPos > str.length()) { // prevents double exponent causing IOOBE
