@@ -125,6 +125,10 @@ public final class AndroidActivityStackProvider extends SimpleActivityLifecycleC
     public void onActivityPaused(Activity activity) {
         super.onActivityPaused(activity);
         activityLifecycle.put(activity, Lifecycle.Event.ON_PAUSE);
+        
+        if(activity.isFinishing()){
+            onActivityDestroyed(activity);
+        }
     }
 
     @Override
