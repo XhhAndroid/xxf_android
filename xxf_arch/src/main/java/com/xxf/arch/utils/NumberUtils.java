@@ -2230,13 +2230,13 @@ public class NumberUtils {
     }
 
     /**
-     * 判断该数字为正数（大于等于0）
+     * 判断该数字为正数（大于0）
      *
      * @param x
      * @return
      */
     public static boolean isPositiveNumber(Object x) {
         BigDecimal xBd = innerConvertDecimal(x);
-        return xBd.compareTo(BigDecimal.ZERO) >= 0;
+        return xBd.compareTo(BigDecimal.ZERO) > 0;
     }
 }
