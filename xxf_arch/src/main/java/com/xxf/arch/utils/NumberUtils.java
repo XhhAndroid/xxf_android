@@ -2239,4 +2239,14 @@ public class NumberUtils {
         BigDecimal xBd = innerConvertDecimal(x);
         return xBd.compareTo(BigDecimal.ZERO) > 0;
     }
+
+    /**
+     * 判断负数(小于0)
+     * @param x
+     * @return
+     */
+    public static boolean isNegativeNumber(Object x) {
+        BigDecimal xBd = innerConvertDecimal(x);
+        return xBd.compareTo(BigDecimal.ZERO) < 0;
+    }
 }
